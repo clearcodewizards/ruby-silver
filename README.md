@@ -81,7 +81,7 @@ puts hash_symbols[:not_exists]
 ```
 
 ### Variables, constants and scope
-```
+```ruby
 #
 # Variables, constants and scope
 #

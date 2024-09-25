@@ -8,7 +8,8 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
 
 ## Table of contents
 - Syntax
-  - Comment
+  - [Comment](#comment)
+  - [Reserved words](#reserved-words)
   - Literals (e.g., numbers, booleans, strings, characters, arrays, hashes)
   - Variables, constants and scope
   - Operators
@@ -33,13 +34,32 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
 
 ## Syntax
 ### Comment
+Let us write a simple program in ruby. All ruby files will have extension .rb. So, put the following source code in a test.rb file.
 ```ruby
 #
 # This is a comment
 #
 puts 'Hello World!'
 ```
-
+Now run this file with ruby
+```bash
+$ ruby test.rb
+```
+This will produce the following result
+```
+Hello World!
+```
+### Reserved words
+| Reserved | Words |  |  | |
+| --- | --- | --- | --- | --- |
+| BEGIN	| do | next	| then | END |
+| else | nil | true | alias | elsif |
+| not | undef | and |	end | or |
+| unless | begin |	ensure | redo	| until |
+| break |	false | rescue | when | case |
+| for |	retry |	while | class |	if |
+| return | def | in | self | \_\_FILE\_\_ |
+| defined? | module | super | \_\_LINE\_\_ | |
 ### Literals
 ```ruby
 #

@@ -12,7 +12,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Reserved words](#reserved-words)
   - [Literals](#literals) (e.g., numbers, booleans, strings, characters, arrays, hashes)
   - [Variables, constants and scope](#variables-constants-and-scope)
-  - Operators
+  - [Operators](#operators)
   - Conditional branching
   - Loops
   - Method calls
@@ -195,6 +195,59 @@ RubyConstant.author
 ```
 
 ### Operators
+#### Arithmetic operators
+Assume variable a holds 10 and variable b holds 20
+
+| Operator | Description | Example |
+| --- | --- | --- |
+| +	| Addition − Adds values on either side of the operator. | a + b will give 30 |
+| −	| Subtraction − Subtracts right hand operand from left hand operand. | a - b will give -10 |
+| *	| Multiplication − Multiplies values on either side of the operator. | a * b will give 200 |
+| /	| Division − Divides left hand operand by right hand operand.	| b / a will give 2 |
+| %	| Modulus − Divides left hand operand by right hand operand and returns remainder. | b % a will give 0 |
+| ** |	Exponent − Performs exponential (power) calculation on operators.	| a**b will give 10 to the power 20 |
+
+#### Comparison operators
+Assume variable a holds 10 and variable b holds 20
+
+| Operator | Description | Example |
+| --- | --- | --- |
+| == | Checks if the value of two operands are equal or not, if yes then condition becomes true. | (a == b) is not true. |
+| != | Checks if the value of two operands are equal or not, if values are not equal then condition becomes true. | (a != b) is true. |
+| >	| Checks if the value of left operand is greater than the value of right operand, if yes then condition becomes true. | (a > b) is not true. |
+| <	| Checks if the value of left operand is less than the value of right operand, if yes then condition becomes true. | (a < b) is true. |
+| >= | Checks if the value of left operand is greater than or equal to the value of right operand, if yes then condition becomes true. | (a >= b) is not true. |
+| <= | Checks if the value of left operand is less than or equal to the value of right operand, if yes then condition becomes true. | (a <= b) is true. |
+| <=> | Combined comparison operator. Returns 0 if first operand equals second, 1 if first operand is greater than the second and -1 if first operand is less than the second. | (a <=> b) returns -1. |
+| === | Used to test equality within a when clause of a case statement.	| (1...10) === 5 returns true. |
+| .eql? | True if the receiver and argument have both the same type and equal values.	| 1 == 1.0 returns true, but 1.eql?(1.0) is false. |
+| equal? | True if the receiver and argument have the same object id.	| if aObj is duplicate of bObj then aObj == bObj is true, a.equal?bObj is false but a.equal?aObj is true. |
+
+#### Assignment operators
+Assume variable a holds 10 and variable b holds 20
+
+| Operator | Description | Example |
+| --- | --- | --- |
+| =	| Simple assignment operator, assigns values from right side operands to left side operand. | c = a + b will assign the value of a + b into c |
+| += | Add AND assignment operator, adds right operand to the left operand and assign the result to left operand. | b += a is equivalent to b = b + a |
+| -= | Subtract AND assignment operator, subtracts right operand from the left operand and assign the result to left operand. | b -= a is equivalent to b = b - a |
+| *= | Multiply AND assignment operator, multiplies right operand with the left operand and assign the result to left operand. | b *= a is equivalent to b = b * a |
+| /= | Divide AND assignment operator, divides left operand with the right operand and assign the result to left operand. | b /= a is equivalent to b = b / a |
+| %= | Modulus AND assignment operator, takes modulus using two operands and assign the result to left operand.	| b %= a is equivalent to b = b % a |
+| **= | Exponent AND assignment operator, performs exponential (power) calculation on operators and assign value to the left operand. | b **= a is equivalent to b = b ** a |
+
+#### Logical operators
+Assume variable a holds 10 and variable b holds 20
+
+| Operator | Description | Example |
+| --- | --- | --- |
+| and | Called Logical AND operator. If both the operands are true, then the condition becomes true. | (a and b) is true. |
+| or | Called Logical OR Operator. If any of the two operands are non zero, then the condition becomes true. | (a or b) is true. |
+| && | Called Logical AND operator. If both the operands are non zero, then the condition becomes true. | (a && b) is true. |
+| \|\| | Called Logical OR Operator. If any of the two operands are non zero, then the condition becomes true. | (a \|\| b) is true. |
+| !	| Called Logical NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT operator will make false.	| !(a && b) is false. |
+| not	| Called Logical NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT operator will make false.	| not(a && b) is false. |
+
 ### Conditional branching
 ### Loops
 ### Method calls

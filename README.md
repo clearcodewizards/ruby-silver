@@ -10,7 +10,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
 - Syntax
   - [Comment](#comment)
   - [Reserved words](#reserved-words)
-  - Literals (e.g., numbers, booleans, strings, characters, arrays, hashes)
+  - [Literals](#literals) (e.g., numbers, booleans, strings, characters, arrays, hashes)
   - Variables, constants and scope
   - Operators
   - Conditional branching
@@ -50,6 +50,7 @@ This will produce the following result
 Hello World!
 ```
 ### Reserved words
+Since Ruby is case sensitive you can almost use anything for naming except these exact words.
 | Reserved | Words |  |  | |
 | --- | --- | --- | --- | --- |
 | BEGIN	| do | next	| then | END |
@@ -66,38 +67,24 @@ Hello World!
 # Literals
 #
 integer = 1
+integer_thousands = 1_000 # this is prefered for easy reading but 1000 works as well
 float = 1.25
+
+hexadecimal = 0xff
+
 boolean = true # false
+
 string = 'This is a string'
-string_double_quotes = "This is also a string"
+string_double_quotes = "This is a string but used icw #{variable}"
+
 character = 'a' # actually a string but of size 1
-special_character = "\n"
+special_character = "\n" # special characters need double quotes to work
+escape_character = 'That\'s right'
 
 array = [1, 2, 3, 4, 5]
 
 hash = { 'key' => 'value', 'key2' => 'value2' } # also called dictonary
 hash_symbols = { key: 'value', key2: 'value2' }
-
-puts integer, float, boolean, string, string_double_quotes, character
-
-puts special_character
-
-puts array[0]
-puts array[4]
-puts array[5]
-puts array.length # or .size alias for .length
-puts array.count
-puts array.count 2
-puts array.to_s
-
-puts hash['key']
-puts hash['key2']
-puts hash['not_exists']
-puts hash.to_s
-
-puts hash_symbols
-puts hash_symbols[:key]
-puts hash_symbols[:not_exists]
 ```
 
 ### Variables, constants and scope

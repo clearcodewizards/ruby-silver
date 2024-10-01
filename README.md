@@ -13,7 +13,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Literals](#literals) (e.g., numbers, booleans, strings, characters, arrays, hashes)
   - [Variables, constants and scope](#variables-constants-and-scope)
   - [Operators](#operators)
-  - Conditional branching
+  - [Conditional branching](#conditional-branching)
   - Loops
   - Method calls
   - Blocks
@@ -249,6 +249,117 @@ Assume variable a holds 10 and variable b holds 20
 | not	| Called Logical NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT operator will make false.	| not(a && b) is false. |
 
 ### Conditional branching
+#### If statement
+If expressions are used for conditional execution.
+The values false and nil are false, and everything else is true.
+Notice Ruby uses elsif, not else if nor elif.
+
+```ruby
+#
+# If statement
+#
+x = 1
+if x > 2
+  puts 'x is greater than 2'
+elsif x <= 2 && x != 0
+  puts 'x is 1'
+else
+  puts 'I can\'t guess the number'
+end
+```
+
+#### If modifier
+In ruby you can use modifiers for almost every conditional statements.
+```ruby
+#
+# If modifier
+#
+x = 1
+puts 'x is 1' if x == 1
+```
+
+#### Ternary operator
+A ternary gives you a way to write a compact if/else expression in just one line of code.
+I don't recommend the use of this since it makes your code a bit hard to read instead use the if modifier.
+First you see a normal if statement followed by if modifier and the ternary way.
+```ruby
+number = 200
+big_number = if number > 100
+               true
+             else
+               false
+             end
+
+big_number = false
+big_number = true if number > 100
+
+big_number = number > 100 ? true : false
+```
+
+#### Unless statement
+In Ruby it's not common to use if statements with a not condition instead use the unless statement.
+```ruby
+#
+# Unless statement
+#
+x = 1 
+unless x >= 2
+  puts 'x is less than 2'
+else
+  puts 'x is greater than 2'
+end
+```
+
+#### Unless modifier
+```ruby
+#
+# Unless modifier
+#
+x = 1
+puts 'x is less than 2' unless x >= 2
+```
+
+#### Case statement
+Compares the expression specified by case and that specified by when using the === operator and executes the code of the when clause that matches.
+The expression specified by the when clause is evaluated as the left operand. If no when clauses match, case executes the code of the else clause.
+A when statement's expression is separated from code by the reserved word then, a newline, or a semicolon.
+```ruby
+case value
+when expr1, expr2
+  stmt1
+when expr3, expr4
+  stmt2
+else
+  stmt3
+end
+```
+Example
+```ruby
+age = 5
+case age
+when 0..2
+  puts 'baby'
+when 3..6
+  puts 'little child'
+when 7..12
+  puts 'child'
+when 13..18
+  puts 'youth'
+else
+  puts 'adult'
+end
+
+city = 'amsterdam'
+case city
+when 'amsterdam', 'rotterdam', 'denhaag'
+  puts 'netherlands'
+when 'antwerp', 'brussel'
+  puts 'belgium'
+else
+  puts 'unknown'
+end
+```
+
 ### Loops
 ### Method calls
 ### Blocks

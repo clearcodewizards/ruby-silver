@@ -15,11 +15,9 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Operators](#operators)
   - [Conditional branching](#conditional-branching)
   - [Loops](#loops)
-  - Method calls
+  - [Methods](#methods)
   - Blocks
   - Exception handling
-  - Method definition
-  - Keyword arguments
   - Class definition
   - Module definition
 
@@ -421,11 +419,11 @@ hash.each_key do |key|
 end
 ```
 
-### Method calls
+### Methods
+#### Arguments
+#### Keyword arguments
 ### Blocks
 ### Exception handling
-### Method definition
-### Keyword arguments
 ### Class definition
 ### Module definition
 

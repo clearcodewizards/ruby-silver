@@ -14,7 +14,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Variables, constants and scope](#variables-constants-and-scope)
   - [Operators](#operators)
   - [Conditional branching](#conditional-branching)
-  - Loops
+  - [Loops](#loops)
   - Method calls
   - Blocks
   - Exception handling
@@ -361,6 +361,66 @@ end
 ```
 
 ### Loops
+Loops in Ruby are used to execute the same block of code a specified number of times.
+#### While loop
+While loops in ruby are condition based and can be used as modifier. The following example shows you 3 ways to use a while loop.
+```ruby
+index = 0
+number = 5
+
+while index < number  # do is optional
+  puts "Inside the loop index = #{index}"
+  index += 1
+end
+
+index = 0
+begin
+  puts "Inside the loop index = #{index}"
+  index += 1
+end while index < number
+
+index = 0
+index += 1 while index < number
+```
+
+#### Until loop
+Exactly the same as while loop but loops when condition is false.
+```ruby
+index = 0
+number = 5
+
+until index == number
+  puts "Inside the loop index = #{index}"
+  index += 1
+end
+```
+
+#### For loop
+For loops in Ruby are expression based, so it loops over a set or range of data.
+```ruby
+for number in 0..5
+  puts "Value of local variable is #{number}"
+end
+```
+
+#### Each loop (Iterator)
+The each iterator is the most used in Ruby, the variables are scoped in the each block and not accessible outside the block.
+```ruby
+numbers = [0, 1, 2, 3, 4, 5]
+numbers.each do |number|
+  puts "Value of scoped variable number is #{number}"
+end
+
+hash = { a: 0, b: 1, c: 2, d: 3 }
+hash.each do |key, value|
+  puts "The key is #{key} and value is #{value}"
+end
+
+hash.each_key do |key|
+  puts "The key is #{key} and value is #{hash[key]}"
+end
+```
+
 ### Method calls
 ### Blocks
 ### Exception handling

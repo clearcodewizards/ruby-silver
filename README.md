@@ -419,9 +419,76 @@ hash.each_key do |key|
 end
 ```
 
+#### Break, next, redo and retry
+
 ### Methods
+Ruby methods are very similar to functions in any other programming language. Ruby methods are used to bundle one or more repeatable statements into a single unit.
+
+Method names should begin with a lowercase letter. If you begin a method name with an uppercase letter, Ruby might think that it is a constant and hence can parse the call incorrectly.
+
+Methods should be defined before calling them, otherwise Ruby will raise an exception for undefined method invoking.
+
+So how to define and call a method?
+```ruby
+def ruby_method
+  puts 'I love Ruby'
+end
+
+ruby_method
+```
+
+#### Return values
+The last variable or expression in a method is automatically returned as value.
+You can use the keyword return to exit a method earlier.
+```ruby
+def test
+  'This is a test'
+end
+
+puts test
+
+def test_variable
+  variable = 'This is a test'
+end
+
+puts test_variable
+
+def test_return
+  return 'Test return' if true
+
+  'This will never be reached'
+end
+
+puts test_return
+```
+
 #### Arguments
+Most of the time you want a method to do something with data so you can define arguments for a method to do so.
+```ruby
+def multiply(a, b)
+  a * b
+end
+
+c = multiply(2, 4)
+```
+Ruby gives you an error when you call this method without arguments.
+```ruby
+in `multiply': wrong number of arguments (given 0, expected 2) (ArgumentError)
+```
+You can however supply default values so the method will work even when you don't use arguments.
+```ruby
+def multiply(a = 2, b = 4)
+  a * b
+end
+
+puts multiply
+```
+Add this point arguments can make your life harder and not easier since it doesn't give you an error when you forget a argument or use the wrong one.
+
+The solution to this problem? Use keyword arguments.
+
 #### Keyword arguments
+
 ### Blocks
 ### Exception handling
 ### Class definition

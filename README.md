@@ -576,6 +576,34 @@ Add this point arguments can make your life harder and not easier since it doesn
 The solution to this problem? Use keyword arguments.
 
 #### Keyword arguments
+Keyword arguments are written by adding : to the arguments. Lets use the same examples but with keyword arguments.
+```ruby
+#
+# Keyword arguments
+#
+def multiply(a:, b:)
+  a * b
+end
+
+c = multiply(a: 2, b: 4)
+```
+Ruby gives you an error when you call this method without arguments.
+```ruby
+in `multiply': missing keywords: :a, :b (ArgumentError)
+```
+You see the difference? It's way more clear what's going wrong.
+
+Like with positional arguments you can use default values with keyword arguments.
+```ruby
+#
+# Default values for arguments
+#
+def multiply(a: 2, b: 4)
+  a * b
+end
+
+puts multiply
+```
 
 ### Blocks
 ### Exception handling

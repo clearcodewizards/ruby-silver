@@ -281,6 +281,9 @@ A ternary gives you a way to write a compact if/else expression in just one line
 I don't recommend the use of this since it makes your code a bit hard to read instead use the if modifier.
 First you see a normal if statement followed by if modifier and the ternary way.
 ```ruby
+#
+# Ternary operator
+#
 number = 200
 big_number = if number > 100
                true
@@ -322,6 +325,9 @@ Compares the expression specified by case and that specified by when using the =
 The expression specified by the when clause is evaluated as the left operand. If no when clauses match, case executes the code of the else clause.
 A when statement's expression is separated from code by the reserved word then, a newline, or a semicolon.
 ```ruby
+#
+# Case statement
+#
 case value
 when expr1, expr2
   stmt1
@@ -333,6 +339,9 @@ end
 ```
 Example
 ```ruby
+#
+# Case statement
+#
 age = 5
 case age
 when 0..2
@@ -363,6 +372,9 @@ Loops in Ruby are used to execute the same block of code a specified number of t
 #### While loop
 While loops in ruby are condition based and can be used as modifier. The following example shows you 3 ways to use a while loop.
 ```ruby
+#
+# While loop
+#
 index = 0
 number = 5
 
@@ -384,6 +396,9 @@ index += 1 while index < number
 #### Until loop
 Exactly the same as while loop but loops when condition is false.
 ```ruby
+#
+# Until loop
+#
 index = 0
 number = 5
 
@@ -396,6 +411,9 @@ end
 #### For loop
 For loops in Ruby are expression based, so it loops over a set or range of data.
 ```ruby
+#
+# For loop
+#
 for number in 0..5
   puts "Value of local variable is #{number}"
 end
@@ -404,6 +422,9 @@ end
 #### Each loop (Iterator)
 The each iterator is the most used in Ruby, the variables are scoped in the each block and not accessible outside the block.
 ```ruby
+#
+# Each iterator
+#
 numbers = [0, 1, 2, 3, 4, 5]
 numbers.each do |number|
   puts "Value of scoped variable number is #{number}"
@@ -419,7 +440,62 @@ hash.each_key do |key|
 end
 ```
 
-#### Break, next, redo and retry
+#### Break
+Terminates the most internal loop. Terminates a method with an associated block if called within the block (with the method returning nil).
+```ruby
+#
+# Break
+#
+for i in 0..5
+  if i > 2 then
+    break
+  end
+  puts "Value of local variable is #{i}"
+end
+```
+What result will this produce?
+
+#### Next
+Jumps to the next iteration of the most internal loop. Terminates execution of a block if called within a block (with yield or call returning nil).
+```ruby
+#
+# Next
+#
+for i in 0..5
+  if i < 2 then
+    next
+  end
+  puts "Value of local variable is #{i}"
+end
+```
+What result will this produce?
+
+#### Redo
+Restarts this iteration of the most internal loop, without checking loop condition. Restarts yield or call if called within a block.
+```ruby
+#
+# Redo
+#
+for i in 0..5
+   if i < 2 then
+      puts "Value of local variable is #{i}"
+      sleep(1)
+      redo
+   end
+end
+```
+Why is a sleep method used?
+
+#### Retry
+Same as redo but arguments to the iterator are re-evaluated, meaning the loop starts from the beginning with the start values.
+```ruby
+#
+# Retry
+#
+for i in 1..5
+   retry if some_condition # restart from i == 1
+end
+```
 
 ### Methods
 Ruby methods are very similar to functions in any other programming language. Ruby methods are used to bundle one or more repeatable statements into a single unit.
@@ -430,6 +506,9 @@ Methods should be defined before calling them, otherwise Ruby will raise an exce
 
 So how to define and call a method?
 ```ruby
+#
+# Methods
+#
 def ruby_method
   puts 'I love Ruby'
 end
@@ -441,6 +520,9 @@ ruby_method
 The last variable or expression in a method is automatically returned as value.
 You can use the keyword return to exit a method earlier.
 ```ruby
+#
+# Return values
+#
 def test
   'This is a test'
 end
@@ -465,6 +547,9 @@ puts test_return
 #### Arguments
 Most of the time you want a method to do something with data so you can define arguments for a method to do so.
 ```ruby
+#
+# Arguments
+#
 def multiply(a, b)
   a * b
 end
@@ -477,6 +562,9 @@ in `multiply': wrong number of arguments (given 0, expected 2) (ArgumentError)
 ```
 You can however supply default values so the method will work even when you don't use arguments.
 ```ruby
+#
+# Default values for arguments
+#
 def multiply(a = 2, b = 4)
   a * b
 end

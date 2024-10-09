@@ -16,8 +16,8 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Conditional branching](#conditional-branching)
   - [Loops](#loops)
   - [Methods](#methods)
-  - Blocks
-  - Exception handling
+  - [Blocks](#blocks)
+  - [Exception handling](#exception-handling)
   - Class definition
   - Module definition
 
@@ -606,7 +606,172 @@ puts multiply
 ```
 
 ### Blocks
+You have seen how Ruby defines methods where you can put number of statements and then you call that method. Similarly, Ruby has a concept of Block.
+
+A block consists of chunks of code.
+You assign a name to a block.
+The code in the block is always enclosed within braces ({}).
+A block is always invoked from a function with the same name as that of the block. This means that if you have a block with the name test, then you use the function test to invoke this block.
+You invoke a block by using the yield statement.
+
+#### Yield Statement
+Let's look at an example of the yield statement
+
+```ruby
+#
+# Blocks
+#
+def test
+  puts 'You are in the method'
+  yield
+  puts 'You are again back to the method'
+  yield
+end
+
+test { puts 'You are in the block' }
+```
+This will produce the following result
+```
+You are in the method
+You are in the block
+You are again back to the method
+You are in the block
+```
+
+You also can pass arguments with the yield statement. Here is an example
+
+```ruby
+#
+# Blocks with arguments
+#
+def test
+   yield 5
+   puts 'You are in the method test'
+   yield 100
+end
+
+test { |i| puts "You are in the block #{i}" }
+```
+This will produce the following result
+```
+You are in the block 5
+You are in the method test
+You are in the block 100
+```
+Here, the yield statement is written followed by arguments. You can even pass more than one argument. In the block, you place a variable between two vertical lines (||) to accept the arguments. Therefore, in the preceding code, the yield 5 statement passes the value 5 as a argument to the test block.
+
+If you want to pass more than one parameters, then the yield statement becomes
+
+```ruby
+yield a, b
+```
+and the block is
+```ruby
+test { |a, b| statement }
+```
+The arguments are separated by commas.
+
+#### BEGIN and END blocks
+Every Ruby source file can declare blocks of code to be run as the file is being loaded (the BEGIN blocks) and after the program has finished executing (the END blocks).
+
+```ruby
+#
+# BEGIN and END blocks
+#
+BEGIN { 
+   # BEGIN block code 
+   puts "This will run before anything else"
+} 
+
+END { 
+   # END block code 
+   puts "This will run when the main code is finished"
+}
+
+# MAIN block code 
+puts "MAIN code block"
+```
+
 ### Exception handling
+The execution and the exception always go together. If you are opening a file, which does not exist, then if you did not handle this situation properly, then your program is considered to be of bad quality.
+
+The program stops if an exception occurs. So exceptions are used to handle various type of errors, which may occur during a program execution and take appropriate action instead of halting program completely.
+
+Ruby provide a nice mechanism to handle exceptions. We enclose the code that could raise an exception in a begin/end block and use rescue clauses to tell Ruby the types of exceptions we want to handle.
+
+Lets try to open a file which does not exist
+```ruby
+#
+# Exception handling
+#
+begin
+  file = open('./unexistant_file')
+  puts 'File opened successfully' if file
+rescue
+  puts 'File does not exist'
+end
+```
+
+It's actually a bad habit to catch all errors like this since the file could be there but is not readable. You can fine grain the rescue by using an exception class.
+```ruby
+#
+# Exception handling
+#
+begin
+  file = open('./unexistant_file')
+  puts 'File opened successfully' if file
+rescue Errno::ENOENT
+  puts 'File does not exist'
+rescue Errno::EACCES
+  puts 'The file got the wrong permissions'
+end
+```
+
+You can actually catch the error message and backtrace by using the following
+```ruby
+#
+# Exception handling
+#
+begin
+  file = open('./unexistant_file')
+  puts 'File opened successfully' if file
+rescue Errno::ENOENT => e
+  puts e.message
+  puts e.backtrace.inspect
+end
+```
+#### Raise statement
+Sometimes you want to raise an error yourself, you can use the raise statement for this
+```ruby
+#
+# Raise statement
+#
+begin
+  file = open('./unexistant_file')
+  raise StandardError, 'File is empty' if file.size.zero?
+
+  puts file.readline
+rescue Errno::ENOENT
+  puts 'File does not exist'
+rescue Errno::EACCES
+  puts 'The file got the wrong permissions'
+end
+```
+
+You don't need to use begin when you are already in a block (loops, iterators, methods), it actually makes your code much cleaner
+```ruby
+#
+# Exception handling
+#
+File.open('./unexistant_file') do |file|
+  puts file.readline
+rescue Errno::ENOENT
+  puts 'File does not exist'
+rescue Errno::EACCES
+  puts 'The file got the wrong permissions'
+end
+```
+
 ### Class definition
 ### Module definition
 

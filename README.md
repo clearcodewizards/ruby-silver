@@ -21,14 +21,14 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Class definition](#class-definition)
   - [Module definition](#module-definition)
 
-- Built-in libraries
-  - Well-used built-in classes and modules
-    (e.g., Object, Numerical classes, String, Array, Hash, Kernel, Enumerable, Comparable)
-
 - Object orientation
   - Inheritance
   - Polymorphism by inheritance
   - Mix-in a.k.a modules
+
+- Built-in libraries
+  - Well-used built-in classes and modules
+    (e.g., Object, Numerical classes, String, Array, Hash, Kernel, Enumerable, Comparable)
 
 ## Syntax
 
@@ -925,11 +925,41 @@ puts user.name, user.email
 ```
 
 ### Module definition
+Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits.
 
-## Built-in libraries
-### Well-used classes and modules
+Modules provide a namespace and prevent name clashes.
+
+Modules implement the mixin facility.
+
+Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants.
+
+```ruby
+#
+# Module definition
+#
+module Week
+  FIRST_DAY = 'Sunday'
+
+  def self.weeks_in_month
+    puts 'You have four weeks in a month'
+  end
+
+  def self.weeks_in_year
+    puts 'You have 52 weeks in a year'
+  end
+end
+
+puts Week::FIRST_DAY
+Week.weeks_in_month
+```
+Module constants are named just like class constants, with an initial uppercase letter. The method definitions look similar, too: Module methods are defined just like class methods.
+
+As with class methods, you call a module method by preceding its name with the module's name and a period, and you reference a constant using the module name and two colons.
 
 ## Object orientation
 ### Inheritance
 ### Polymorphism by inheritance
 ### Mix-in a.k.a modules
+
+## Built-in libraries
+### Well-used classes and modules

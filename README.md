@@ -18,8 +18,8 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Methods](#methods)
   - [Blocks](#blocks)
   - [Exception handling](#exception-handling)
-  - Class definition
-  - Module definition
+  - [Class definition](#class-definition)
+  - [Module definition](#module-definition)
 
 - Built-in libraries
   - Well-used built-in classes and modules
@@ -773,6 +773,157 @@ end
 ```
 
 ### Class definition
+To implement object-oriented programming by using Ruby, you need to first learn how to create objects and classes in Ruby.
+
+A class in Ruby always starts with the keyword class followed by the name of the class. The name should always be in initial capitals.
+```ruby
+#
+# Class definition
+#
+class User
+end
+```
+To create a new object from the class you simple call the new method
+```ruby
+user = User.new
+```
+
+You probably want to do something more with the object i.e. set the name, you can add parameters to a class with the initialize method (constructor).
+```ruby
+#
+# Class definition
+#
+class User
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+
+user = User.new('Jeroen', 'jeroen@clearcodewizards.com')
+```
+
+To access the instance variables we want to use an instance method
+
+#### Instance method
+Instance methods are only available when you have created an object (instance) from the class with the new method.
+Lets create an instance method which will return the email from an user oject.
+```ruby
+#
+# Class definition
+#
+class User
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+
+  def email
+    @email
+  end
+end
+
+user = User.new('Jeroen', 'jeroen@clearcodewizards.com')
+puts user.email
+```
+
+Now create an instance method which set the email after the object is already created.
+```ruby
+#
+# Class definition
+#
+class User
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+
+  def email
+    @email
+  end
+
+  def email=(email)
+    @email = email
+  end
+end
+
+user = User.new('Jeroen', 'jeroen@clearcodewizards.com')
+puts user.email
+
+user.email = 'jeroen@test.com'
+puts user.email
+```
+
+But doing this takes time and effort while it's something that everybody is using anyway so ruby came up with helpers for this.
+Instead of adding methods for getting and setting you can use the attr_reader, attr_writer or attr_accessor helpers.
+This example works the same as above, see the difference?
+```ruby
+#
+# Class definition
+#
+class User
+  attr_accessor :email
+
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+
+user = User.new('Jeroen', 'jeroen@clearcodewizards.com')
+puts user.email
+
+user.email = 'jeroen@test.com'
+puts user.email
+```
+
+If you only want to be able to read use attr_reader, and if you only need to write to the instance variable use attr_writer.
+
+#### Class method
+A class method can be called directly without creating an object (instance) first.
+```ruby
+#
+# Class definition
+#
+class User
+  def self.version
+    'v1.0' 
+  end
+end
+
+puts User.version
+```
+
+#### Require
+You can store the classes in seperate ruby files and use them in other ruby files by using require and require_relative.
+The require statement uses the default ruby library search paths, the require_relative uses current path.
+
+Try it by adding the following code in user.rb file:
+```ruby
+#
+# Class definition
+#
+class User
+  attr_reader :name
+  attr_accessor :email
+
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+```
+Now write a main.rb file which calls the user class
+```ruby
+#
+# Require statement
+#
+require_relative 'user'
+
+user = User.new('Jeroen', 'jeroen@clearcodewizards.com')
+puts user.name, user.email
+```
+
 ### Module definition
 
 ## Built-in libraries

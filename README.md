@@ -23,7 +23,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
 
 - Object orientation
   - [Inheritance](#inheritance)
-  - Polymorphism by inheritance
+  - [Polymorphism](#polymorphism)
   - Mix-in a.k.a modules
 
 - Built-in libraries
@@ -997,7 +997,93 @@ box = BigBox.new(10, 20)
 box.print_area
 ```
 
-### Polymorphism by inheritance
+### Polymorphism
+Polymorphism is a made up of two words Poly which means Many and Morph which means Forms. So Polymorphism is a method where one is able to execute the same method using different objects. In polymorphism, we can obtain different results using the same function by passing different input objects. One can also write the if-else statements but that just makes the code more lengthy. To avoid this, the programmers came up with the concept of polymorphism.
+
+In Polymorphism, classes have different functionality but they share common interface. The concept of polymorphism can be implemented in ruby with inheritance and duck typing.
+
+#### Polymorphism using inheritance
+One can easily implement polymorphism using inheritance by overriding the superclass methods.
+```ruby
+#
+# Polymorphism using inheritance
+#
+class Vehicle
+  def type
+    puts 'Heavy Car'
+  end
+end
+
+# Using inheritance
+class Car < Vehicle
+  def type
+    puts 'Small Car'
+  end
+end
+
+# Using inheritance
+class Truck < Vehicle
+  def type
+    puts 'Big Car'
+  end
+end
+
+[Vehicle.new, Car.new, Truck.new].each do |vehicle|
+  vehicle.type
+end
+```
+
+#### Polymorphism using duck typing
+Duck Typing is nothing but working on the idea of what an object can do rather than what it actually is. Or, what operations could be performed on the object rather than the class of the object.
+```ruby
+#
+# Polymorphism using duck typing
+#
+class Hotel
+  def enters
+    puts 'A customer enters'
+  end
+
+  def type(customer)
+    customer.type
+  end
+
+  def price(customer)
+    customer.price
+  end
+end
+
+class Single
+  def type
+    puts 'Single room'
+  end
+
+  def price
+    puts 'Per night stay is one hundred'
+  end
+end
+
+class Couple
+  def type
+    puts 'Double room'
+  end
+
+  def price
+    puts 'Per night stay is two hundred'
+  end
+end
+
+hotel = Hotel.new
+
+customer = Single.new
+hotel.type(customer)
+hotel.price(customer)
+
+customer = Couple.new
+hotel.type(customer)
+hotel.price(customer)
+```
+
 ### Mix-in a.k.a modules
 
 ## Built-in libraries

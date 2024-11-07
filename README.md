@@ -24,7 +24,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
 - Object orientation
   - [Inheritance](#inheritance)
   - [Polymorphism](#polymorphism)
-  - Mix-in a.k.a modules
+  - [Mix-in](#mix-in)
 
 - Built-in libraries
   - Well-used built-in classes and modules
@@ -1084,7 +1084,40 @@ hotel.type(customer)
 hotel.price(customer)
 ```
 
-### Mix-in a.k.a modules
+### Mix-in
+When a class can inherit features from more than one parent class, the class is supposed to show multiple inheritance.
+
+Ruby does not support multiple inheritance directly but Ruby Modules have another wonderful use. At a stroke, they pretty much eliminate the need for multiple inheritance, providing a facility called a mix-in.
+
+Mix-ins give you a controlled way of adding functionality to classes. However, their true power comes out when the code in the mix-in starts to interact with code in the class that uses it.
+```ruby
+#
+# Mix-in
+#
+module Math
+  def add(value1, value2)
+    value1 + value2
+  end
+end
+
+module Print
+  def print(message)
+    puts message
+  end
+end
+
+class Calc
+  include Math
+  include Print
+
+  def sum(value1, value2)
+    print(add(value1, value2))
+  end
+end
+
+calc = Calc.new
+calc.sum(2, 4)
+```
 
 ## Built-in libraries
 ### Well-used classes and modules

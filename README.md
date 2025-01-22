@@ -1,10 +1,12 @@
 # Ruby 3
 Everything you need to know to prep for Ruby Association Certified Ruby Programmer Silver version 3
 
+https://www.ruby.or.jp/en/certification/examination/
+
 ## Requirements
 - Editor like rubymine, vscode, vim, etc.
 - Git
-- Ruby 3 (latest)
+- Ruby 3 (at least 3.1)
 
 ## Table of contents
 - Syntax
@@ -27,7 +29,7 @@ Everything you need to know to prep for Ruby Association Certified Ruby Programm
   - [Mix-in](#mix-in)
 
 - Built-in libraries
-  - Well-used built-in classes and modules
+  - [Well-used built-in classes and modules](#well-used-classes-and-modules)
     (e.g., Object, Numerical classes, String, Array, Hash, Kernel, Enumerable, Comparable)
 
 ## Syntax
@@ -38,15 +40,14 @@ Let us write a simple program in ruby. All ruby files will have extension .rb. S
 #
 # This is a comment
 #
-puts 'Hello World!'
+puts 'Do you like Ruby?'
+answer = gets
+
+puts "Answer: #{answer}"
 ```
 Now run this file with ruby
 ```bash
 $ ruby test.rb
-```
-This will produce the following result
-```
-Hello World!
 ```
 
 ### Reserved words
@@ -72,6 +73,8 @@ integer_thousands = 1_000 # this is prefered for easy reading but 1000 works as 
 float = 1.25
 
 hexadecimal = 0xff
+
+octal = 025 # always start with a 0 and base 8 so the decimal value is 21 in this case
 
 boolean = true # false
 
@@ -740,6 +743,9 @@ rescue Errno::ENOENT => e
   puts e.backtrace.inspect
 end
 ```
+
+Explain ensure
+
 #### Raise statement
 Sometimes you want to raise an error yourself, you can use the raise statement for this
 ```ruby
@@ -1121,3 +1127,435 @@ calc.sum(2, 4)
 
 ## Built-in libraries
 ### Well-used classes and modules
+#### String
+A string is a sequence of one or more characters that may consist of letters, numbers, or symbols.
+
+Strings in Ruby are objects, and unlike other languages, strings are mutable, which means they can be changed in place instead of creating new strings.
+
+You can define a string by single or double quotes but single quotes are always used for static strings and double quotes are used
+for string interpolation.
+```ruby
+text = 'This is static text'
+
+value = 'interpolation'
+text = "This is string #{value}"
+```
+
+##### Downcase
+Returns a string containing the downcased characters.
+```ruby
+s = 'Hello World!' # => "Hello World!"
+s.downcase         # => "hello world!"
+```
+
+##### Upcase
+Returns a string containing the upcased characters.
+```ruby
+s = 'Hello World!' # => "Hello World!"
+s.upcase           # => "hello world!"
+```
+
+##### Indexing
+Since string is a sequence of characters it acts like an array so you are able to do indexing.
+```ruby
+text = 'bar'
+text[0]      # => "b"
+text[2]      # => "r"
+text[20]     # => nil
+```
+When a negative integer index is given, the slice begins at the offset given by counting backward from the end:
+```ruby
+text = 'bar'
+text[-3]      # => "b"
+text[-1]      # => "r"
+text[-20]     # => nil
+```
+Instead of only giving the start index you can also define the length:
+```ruby
+text = 'bar'
+text[0, 2]      # => "ba"
+text[1, 2]      # => "ar"
+text[-2, 2]     # => "ar"
+```
+
+##### Sub / Gsub
+To replace a piece of string you can use sub and gsub. They both use regular expressions for the search.
+
+The only difference is that sub replace once and gsub replaces all occurences.
+```ruby
+s = 'hello'
+s.sub(/[aeiou]/, '*')  # => "h*llo"
+s.gsub(/[aeiou]/, '*') # => "h*ll*"
+s.gsub(/[aeiou]/, '')  # => "hll"
+s.sub(/ell/, 'al')     # => "halo"
+```
+
+#### Array
+Ruby arrays are ordered, integer-indexed collections of any object. Each element in an array is associated with and referred to by an index.
+
+Array indexing starts at 0, as in C or Java. A negative index is assumed relative to the end of the array.
+
+Ruby arrays can hold objects such as String, Integer, Fixnum, Hash, Symbol, even other Array objects.
+Ruby arrays are not as rigid as arrays in other languages. Ruby arrays grow automatically while adding elements to them.
+```ruby
+array = Array.new   # actually never used
+array = []
+array = [1, 2, 3, 4]
+array = ['this', 'is', 'an', 'example']
+array = %w[this is an example]
+array = %i[this is an example]   # array of symbols
+```
+
+##### Indexing
+```ruby
+array = ['foo', 'bar']
+array[0]      # => "foo"
+array[1]      # => "bar"
+array[20]     # => nil
+```
+When a negative integer index is given, the array element begins at the offset given by counting backward from the end:
+```ruby
+array = ['foo', 'bar']
+array[-2]      # => "foo"
+array[-1]      # => "bar"
+array[-20]     # => nil
+```
+Instead of only giving the start index you can also define the length:
+```ruby
+array = ['foo', 'bar', 'example']
+array[0, 2]      # => ["foo", "bar"]
+array[1, 2]      # => ["bar", "example"]
+array[-2, 2]     # => ["bar", "example"]
+```
+
+##### Join
+In case you want to join two or more elements you can use join.
+```ruby
+array = ['foo', 'bar', 'example']
+array[1, 2]                # => ["bar", "example"]
+array[1, 2].join(' ')      # => "bar example"
+```
+
+##### Each
+Looping through an array with each can be inline or as block.
+```ruby
+[1, 2, 3].each { |n| puts "Current number is: #{n}" }
+Current number is: 1
+Current number is: 2
+Current number is: 3
+
+[1, 2, 3].each do |n|
+  text = "Current number is: #{n}"
+  puts text
+end
+Current number is: 1
+Current number is: 2
+Current number is: 3
+```
+Blocks are used when you need to perform multiple actions to increase the readability.
+My take on this, use blocks whenever possible.
+
+##### Map (important)
+When you want to transform the data in an array you can use map to loop over all elements and transform the data.
+```ruby
+array = ['a', 'b', 'c']
+array.map { |string| string.upcase }     # ['A', 'B', 'C']
+
+# don't do this
+array = ['a', 'b', 'c']
+array.each_index { |index| array[index].upcase! }
+```
+
+##### Append / Push / Insert
+To add an element to an existing array you can use append, push and << operator to add the element on the end of the array.
+
+To put an element anywhere in the array use insert with an index.
+```ruby
+array = []
+array.append('foo')
+array.push('bar')
+array << 'example'   # ["foo", "bar", "example"]
+
+array.insert(0, '1st')  # ["1st", "foo", "bar", "example"]
+array.insert(2, '3rd')  # ["1st", "foo", "3rd", "bar", "example"]
+```
+
+##### Shift
+To get the first element from an array you can use first,
+but when you also want to delete that first element from the array you can use shift.
+
+Commonly used with queues.
+```ruby
+array = [1, 2, 3]
+array.shift    # 1
+array          # [2, 3]
+```
+
+##### Pop
+The same as shift but now on the last element of the array.
+```ruby
+array = [1, 2, 3]
+array.pop      # 3
+array          # [1, 2]
+```
+
+##### Delete
+Deletes all elements from the array that are equal to given argument.
+
+Returns the last deleted element, or nil if no matching element is found.
+```ruby
+a = ['a', 'b', 'b', 'b', 'c']
+a.delete('b')                   # "b"
+a                               # ["a", "c"]
+a.delete('z')                   # nil
+```
+NOTE - String.delete returns the string itself while Array.delete only the last deleted element.
+
+#### Hash
+A Hash is a collection of key-value pairs like this: "employee" = > "salary". It is similar to an Array,
+except that indexing is done via arbitrary keys of any object type, not an integer index.
+
+The order in which you traverse a hash by either key or value may seem arbitrary and will generally not be in the insertion order.
+If you attempt to access a hash with a key that does not exist, the method will return nil.
+```ruby
+hash = Hash.new   # actually never used
+hash = {}
+
+hash = { 'key1' => 'value1', 'key2' => 'value2' }
+hash['key1']    # "value1"
+
+hash = { :key1 => 'key is an symbol', :key2 => 'value2' }
+hash[:key1]    # "value1"
+
+# or using the new way
+hash = { key1: 'key is an symbol', key2: 'value2' }
+hash[:key1]    # "value1"
+```
+
+##### Each
+Looping through an hash with each is almost the same as with an array.
+The big difference you get both the key and value of an hash element.
+```ruby
+hash = { 'key1' => 'value1', 'key2' => 'value2' }
+hash.each do |key, value|
+  puts "Key: #{key}"
+  puts "Value: #{value}"
+end
+```
+
+If you only need the keys you can call keys which return an array with all the keys.
+Or in this example using each_key to loop over the keys.
+```ruby
+hash = { 'key1' => 'value1', 'key2' => 'value2' }
+hash.each_key do |key|
+  puts "Key: #{key}"
+  puts "Value: #{hash[key]}"
+end
+```
+
+Or only the values you can call values which returns an array with all values.
+Or in this example using each_value to loop over all values.
+```ruby
+hash = { 'key1' => 'value1', 'key2' => 'value2' }
+hash.each_value do |value|
+  puts "Value: #{value}"
+end
+```
+
+#### File
+The File class is used to handle files within Ruby.
+You start by opening a file with File.new or File.open.
+
+A big note is that File.open can be used with a block which automaticly closes the File on the end of the block. That's why you should always use File.open
+```ruby
+File.open('filename', 'mode') do |file|
+   # ... process the file
+end
+```
+
+##### Modes
+- r
+  Read-only mode. The file pointer is placed at the beginning of the file. This is the default mode.
+- r+
+  Read-write mode. The file pointer will be at the beginning of the file.
+- w
+  Write-only mode. Overwrites the file if the file exists. If the file does not exist, creates a new file for writing.
+- w+
+  Read-write mode. Overwrites the existing file if the file exists. If the file does not exist, creates a new file for reading and writing.
+- a
+  Write-only mode. The file pointer is at the end of the file if the file exists. That is, the file is in the append mode. If the file does not exist, it creates a new file for writing.
+- a+
+  Read and write mode. The file pointer is at the end of the file if the file exists. The file opens in the append mode. If the file does not exist, it creates a new file for reading and writing.
+
+##### Read
+You can use the method read to read the contents of a file. You must open the file in any of the read modes when using this method.
+
+```ruby
+File.open('test.txt', 'r') do |file|
+  puts file.read
+end
+```
+Or use readline to get an array with lines
+```ruby
+File.open('test.txt', 'r') do |file|
+  file.readlines.each do |line|
+    puts line
+  end
+end
+```
+
+Instead of opening and closing files you can directly read a file or loop over the lines in a file.
+```ruby
+puts File.read('test.txt')
+
+# or
+
+File.foreach('test.txt') do |line|
+  puts line
+end
+```
+
+##### Write
+Use the write method to write to files. You can use File.open or File.write directly.
+```ruby
+File.open('test.txt', 'w') do |file|
+  file.write("This is a line\nAnd this as well")
+end
+```
+And with File.write
+```ruby
+File.write('test.txt', "This is a line\nAnd this as well")
+```
+
+##### Delete
+To delete a file just use the File.delete method
+```ruby
+File.delete('test.txt')
+```
+
+##### Other File methods
+There are many, many handy File methods available, here are some examples:
+```ruby
+# Renaming a file
+File.rename("old-name.txt", "new-name.txt")
+
+# File size in bytes
+File.size("users.txt")
+
+# Does this file already exist?
+File.exists?("log.txt")
+
+# Get the file extension, this works even if the file doesn't exists
+File.extname("users.txt")
+# => ".txt"
+
+# Get the file name without the directory part
+File.basename("/tmp/ebook.pdf")
+# => "ebook.pdf"
+
+# Get the path for this file, without the file name
+File.dirname("/tmp/ebook.pdf")
+# => "/tmp"
+
+# Is this actually a file or a directory?
+File.directory?("cats")
+```
+
+#### Dir
+All files are contained within various directories, and Ruby has no problem handling these too.
+Whereas the File class handles files, directories are handled with the Dir class.
+
+##### Chdir
+To change directory within a Ruby program, use Dir.chdir as follows. This example changes the current directory to /usr/bin.
+
+```ruby
+Dir.chdir('/usr/bin')
+```
+
+##### Pwd
+You can find out what the current directory is with Dir.pwd
+
+```ruby
+puts Dir.pwd   # This will return something like /usr/bin
+```
+
+##### Entries
+You can get a list of the files and directories within a specific directory using Dir.entries
+
+```ruby
+puts Dir.entries('/usr/bin').join(' ')
+```
+Dir.entries returns an array with all the entries within the specified directory. Dir.foreach provides the same feature.
+
+```ruby
+Dir.foreach('/usr/bin') do |entry|
+   puts entry
+end
+```
+An even more concise way of getting directory listings is by using Dir's class array method.
+
+```ruby
+Dir['/usr/bin/*']
+```
+
+##### Mkdir
+The Dir.mkdir can be used to create directories.
+
+```ruby
+Dir.mkdir('mynewdir')
+```
+You can also set permissions on a new directory (not one that already exists) with mkdir.
+
+NOTE − The mask 755 sets permissions owner, group, world [anyone] to rwxr-xr-x where r = read, w = write, and x = execute.
+
+```ruby
+Dir.mkdir('mynewdir', 755)
+```
+
+##### Delete
+The Dir.delete can be used to delete a directory. The Dir.unlink and Dir.rmdir performs exactly the same function and are provided for convenience.
+
+NOTE - The directory needs to be empty before it can be deleted.
+
+```ruby
+Dir.delete('testdir')
+```
+
+#### Enumerable
+The Enumerable mixin provides collection classes with several traversal and searching methods, and with the ability to sort.
+Arrays and Hashes include Enumerable so you can use methods like sort, reverse, include?, each, etc.
+
+The next methods are the most common and can be asked during the examination.
+
+Use https://ruby-doc.org/3.1.6 to learn what these methods are.
+
+##### count
+##### length
+##### size
+##### empty?
+##### blank?
+##### find
+##### find_all
+##### select
+##### filter
+##### first
+##### last
+##### min
+##### max
+##### sum
+##### include?
+##### member?
+##### sort
+##### sort_by
+##### reverse
+##### chop
+##### chomp
+##### replace
+##### delete
+##### delete_if
+##### reject
+##### reject!
+##### each_char
+##### each_slice
+##### tally
+##### uniq

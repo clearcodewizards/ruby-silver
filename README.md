@@ -1,12 +1,15 @@
 # Ruby 3
 Everything you need to know to prep for Ruby Association Certified Ruby Programmer Silver version 3
 
-https://www.ruby.or.jp/en/certification/examination/
-
 ## Requirements
 - Editor like rubymine, vscode, vim, etc.
 - Git
 - Ruby 3 (at least 3.1)
+
+## Links
+- https://www.ruby.or.jp/en/certification/examination/
+- https://ruby-doc.org/3.1.6
+- https://clearcodewizards.com/exams
 
 ## Table of contents
 - Syntax

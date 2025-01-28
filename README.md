@@ -265,7 +265,7 @@ Notice Ruby uses elsif, not else if nor elif.
 x = 1
 if x > 2
   puts 'x is greater than 2'
-elsif x <= 2 && x != 0
+elsif x < 2 && x > 0
   puts 'x is 1'
 else
   puts 'I can\'t guess the number'
@@ -1328,11 +1328,11 @@ hash = { 'key1' => 'value1', 'key2' => 'value2' }
 hash['key1']    # "value1"
 
 hash = { :key1 => 'key is an symbol', :key2 => 'value2' }
-hash[:key1]    # "value1"
+hash[:key1]    # "key is an symbol"
 
 # or using the new way
 hash = { key1: 'key is an symbol', key2: 'value2' }
-hash[:key1]    # "value1"
+hash[:key1]    # "key is an symbol"
 ```
 
 ##### Each
@@ -1452,7 +1452,7 @@ File.rename("old-name.txt", "new-name.txt")
 File.size("users.txt")
 
 # Does this file already exist?
-File.exists?("log.txt")
+File.exist?("log.txt")
 
 # Get the file extension, this works even if the file doesn't exists
 File.extname("users.txt")
